@@ -40,6 +40,7 @@
 , openssh
 , libsecret
 , libgdata
+, libmsgraph
 , python3
 , python3Packages
 , gsettings-desktop-schemas
@@ -106,7 +107,7 @@ stdenv.mkDerivation rec {
     gnome-online-accounts
     libsecret
     libgdata
-    python3Packages.msgraph-core
+    libmsgraph
   ];
 
   mesonFlags = [
