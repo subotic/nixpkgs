@@ -8,17 +8,15 @@
 , ninja
 , libxslt
 , gtk4
-, libadwaita
 , enableBackend ? stdenv.isLinux
-, webkitgtk_4_1
 , json-glib
+, libadwaita
 , librest_1_0
 , libxml2
 , libsecret
 , gtk-doc
 , gobject-introspection
 , gettext
-, icu
 , glib-networking
 , libsoup_3
 , docbook-xsl-nons
@@ -28,7 +26,7 @@
 , libkrb5
 , gvfs
 , dbus
-, wrapGAppsHook
+, wrapGAppsHook4
 }:
 
 stdenv.mkDerivation rec {
@@ -65,7 +63,7 @@ stdenv.mkDerivation rec {
     ninja
     pkg-config
     vala
-    wrapGAppsHook
+    wrapGAppsHook4
   ];
 
   buildInputs = [
@@ -82,11 +80,7 @@ stdenv.mkDerivation rec {
     libxml2
     libsecret
     libsoup_3
-  ] ++ lib.optionals enableBackend [
-    webkitgtk_4_1
   ];
-
-  env.NIX_CFLAGS_COMPILE = "-I${glib.dev}/include/gio-unix-2.0";
 
   separateDebugInfo = true;
 
