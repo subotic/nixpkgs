@@ -1,0 +1,17 @@
+diff --git a/docs/reference/meson.build b/docs/reference/meson.build
+index c990b9775..e0bbc0561 100644
+--- a/docs/reference/meson.build
++++ b/docs/reference/meson.build
+@@ -14,10 +14,10 @@ if get_option('documentation') and enable_gir
+     '--fatal-warnings',
+     '--add-include-path=@0@'.format(meson.current_build_dir() / '../../girepository/introspection'),
+   ]
+-
+-  docs_dir = glib_datadir / 'doc' / 'glib-2.0'
+ endif
+ 
++docs_dir = glib_datadir / 'doc' / 'glib-2.0'
++
+ subdir('glib')
+ subdir('gmodule')
+ subdir('gobject')

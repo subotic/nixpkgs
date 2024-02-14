@@ -8,7 +8,8 @@
 , pkg-config
 , perl
 , python3
-, libiconv, zlib, libffi, pcre2, libelf, gnome, libselinux, bash, gnum4, gtk-doc, docbook_xsl, docbook_xml_dtd_45, libxslt
+, python3Packages
+, libiconv, zlib, libffi, pcre2, libelf, gnome, libselinux, bash, gnum4, gtk-doc, docbook_xsl, docbook_xml_dtd_45, libxslt, docutils
 # use util-linuxMinimal to avoid circular dependency (util-linux, systemd, glib)
 , util-linuxMinimal ? null
 , buildPackages
@@ -50,11 +51,11 @@ in
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "glib";
-  version = "2.78.4";
+  version = "2.79.2";
 
   src = fetchurl {
     url = "mirror://gnome/sources/glib/${lib.versions.majorMinor finalAttrs.version}/glib-${finalAttrs.version}.tar.xz";
-    sha256 = "sha256-JLjgZy3KEgzDLTlLzLhYROcy4E/nXRi7BXOy28dUj2M=";
+    sha256 = "sha256-pH9+z3u6A0bmzVYoh7k+5O43pX2NyuB1Xw3o3HXKXow=";
   };
 
   patches = lib.optionals stdenv.isDarwin [
@@ -93,12 +94,11 @@ stdenv.mkDerivation (finalAttrs: {
     #    * gio-launch-desktop
     ./split-dev-programs.patch
 
-    # Disable flaky test.
-    # https://gitlab.gnome.org/GNOME/glib/-/issues/820
-    ./skip-timer-test.patch
+    # Fix building with docs enabled and introspection disabled
+    ./fix-docs.patch
   ];
 
-  outputs = [ "bin" "out" "dev" "devdoc" ];
+  outputs = [ "bin" "out" "dev" "doc" ];
 
   setupHook = ./setup-hook.sh;
 
@@ -134,6 +134,7 @@ stdenv.mkDerivation (finalAttrs: {
     pkg-config
     perl
     python3
+    python3Packages.packaging
     gettext
     libxslt
     docbook_xsl
@@ -141,9 +142,13 @@ stdenv.mkDerivation (finalAttrs: {
     gtk-doc
     docbook_xml_dtd_45
     libxml2
+    docutils
   ];
 
-  propagatedBuildInputs = [ zlib libffi gettext libiconv ];
+  propagatedBuildInputs = [ zlib libffi gettext libiconv 
+    python3
+    python3Packages.packaging
+  ];
 
   mesonFlags = [
     # Avoid the need for gobject introspection binaries in PATH in cross-compiling case.
@@ -151,6 +156,7 @@ stdenv.mkDerivation (finalAttrs: {
     "-Dgtk_doc=${lib.boolToString buildDocs}"
     "-Dnls=enabled"
     "-Ddevbindir=${placeholder "dev"}/bin"
+    "-Dintrospection=disabled"
   ] ++ lib.optionals (!stdenv.isDarwin) [
     "-Dman=true"                # broken on Darwin
   ] ++ lib.optionals stdenv.isFreeBSD [
@@ -166,10 +172,6 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   postPatch = ''
-    chmod +x gio/tests/gengiotypefuncs.py
-    patchShebangs gio/tests/gengiotypefuncs.py
-    chmod +x docs/reference/gio/concat-files-helper.py
-    patchShebangs docs/reference/gio/concat-files-helper.py
     patchShebangs glib/gen-unicode-tables.pl
     patchShebangs glib/tests/gen-casefold-txt.py
     patchShebangs glib/tests/gen-casemap-txt.py
