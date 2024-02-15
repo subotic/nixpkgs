@@ -7,7 +7,8 @@
 , meson
 , ninja
 , libxslt
-, gtk3
+, gtk4
+, libadwaita
 , enableBackend ? stdenv.isLinux
 , webkitgtk_4_1
 , json-glib
@@ -23,7 +24,7 @@
 , docbook-xsl-nons
 , docbook_xml_dtd_412
 , gnome
-, gcr
+, gcr_4
 , libkrb5
 , gvfs
 , dbus
@@ -32,7 +33,7 @@
 
 stdenv.mkDerivation rec {
   pname = "gnome-online-accounts";
-  version = "3.48.0";
+  version = "3.49.2";
 
   outputs = [ "out" "dev" ] ++ lib.optionals enableBackend [ "man" "devdoc" ];
 
@@ -41,7 +42,7 @@ stdenv.mkDerivation rec {
     owner = "GNOME";
     repo = "gnome-online-accounts";
     rev = version;
-    sha256 = "sha256-USl0Qay9pSgbbp3n/L8eBaRQwaBYledht5j+afmo++o=";
+    sha256 = "sha256-VasnevsztnPDCU1K4BCBTMTSvnE0gkdYFO+9pvRhPdY=";
   };
 
   mesonFlags = [
@@ -49,7 +50,7 @@ stdenv.mkDerivation rec {
     "-Dgoabackend=${lib.boolToString enableBackend}"
     "-Dgtk_doc=${lib.boolToString enableBackend}"
     "-Dman=${lib.boolToString enableBackend}"
-    "-Dmedia_server=true"
+    "-Dwebdav=true"
   ];
 
   nativeBuildInputs = [
@@ -68,10 +69,11 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
-    gcr
+    gcr_4
     glib
     glib-networking
-    gtk3
+    gtk4
+    libadwaita
     gvfs # OwnCloud, Google Drive
     icu
     json-glib
