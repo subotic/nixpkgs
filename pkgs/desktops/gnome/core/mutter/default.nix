@@ -69,7 +69,7 @@ stdenv.mkDerivation (finalAttrs: {
   pname = "mutter";
   version = "46.beta";
 
-  outputs = [ "out" "dev" "man" ];
+  outputs = [ "out" "dev" "man" "devdoc" ];
 
   src = fetchurl {
     url = "mirror://gnome/sources/mutter/${lib.versions.major finalAttrs.version}/mutter-${finalAttrs.version}.tar.xz";
@@ -172,7 +172,7 @@ stdenv.mkDerivation (finalAttrs: {
   postFixup = ''
     # Cannot be in postInstall, otherwise _multioutDocs hook in preFixup will move right back.
     # TODO: Move this into a directory devhelp can find.
-    moveToOutput "share/mutter-13/doc" "$devdoc"
+    moveToOutput "share/mutter-14/doc" "$devdoc"
   '';
 
   # Install udev files into our own tree.
@@ -181,7 +181,7 @@ stdenv.mkDerivation (finalAttrs: {
   separateDebugInfo = true;
 
   passthru = {
-    libdir = "${finalAttrs.finalPackage}/lib/mutter-13";
+    libdir = "${finalAttrs.finalPackage}/lib/mutter-14";
 
     tests = {
       libdirExists = runCommand "mutter-libdir-exists" {} ''
