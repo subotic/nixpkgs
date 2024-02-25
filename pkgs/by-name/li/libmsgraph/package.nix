@@ -6,26 +6,26 @@
 , meson
 , ninja
 , pkg-config
+, uhttpmock_1_0
 , glib
 , gnome-online-accounts
 , json-glib
-, librest
-, libsoup
-, uhttpmock
+, librest_1_0
+, libsoup_3
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "libmsgraph";
-  version = "0-unstable-2024-01-30";
+  version = "0.1.0";
 
   outputs = [ "out" "dev" "devdoc" ];
 
   src = fetchFromGitLab {
     domain = "gitlab.gnome.org";
-    owner = "jbrummer";
+    owner = "GNOME";
     repo = "msgraph";
-    rev = "a483db18ef2884d069ad0cf501a04f67950b5639";
-    hash = "sha256-8nIjxAHttG4f8CytCCMNI/E+hwfX6eJeqO7LJBMCuTk=";
+    rev = finalAttrs.version;
+    hash = "sha256-UH8qJxOrJL7gqR1QDQJ+HQ1u3tA3TcSZMluAOSSC40I=";
   };
 
   nativeBuildInputs = [
@@ -36,16 +36,20 @@ stdenv.mkDerivation (finalAttrs: {
     pkg-config
   ];
 
+  buildInputs = [
+    uhttpmock_1_0
+  ];
+
   propagatedBuildInputs = [
     glib
     gnome-online-accounts
     json-glib
-    librest
-    libsoup
-    uhttpmock
+    librest_1_0
+    libsoup_3
   ];
 
   mesonFlags = [
+    # https://gitlab.gnome.org/GNOME/msgraph/-/merge_requests/9
     "-Dc_args=-Wno-error=format-security"
   ];
 
@@ -56,7 +60,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   meta = with lib; {
     description = "Library to access MS Graph API for Office 365";
-    homepage = "https://gitlab.gnome.org/jbrummer/msgraph";
+    homepage = "https://gitlab.gnome.org/GNOME/msgraph";
     license = licenses.lgpl3Plus;
     maintainers = teams.gnome.members;
     platforms = platforms.linux;
