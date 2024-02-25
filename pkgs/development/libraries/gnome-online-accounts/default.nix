@@ -73,7 +73,6 @@ stdenv.mkDerivation rec {
     gtk4
     libadwaita
     gvfs # OwnCloud, Google Drive
-    icu
     json-glib
     libkrb5
     librest_1_0
