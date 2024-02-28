@@ -13,7 +13,6 @@
 , polkit
 , networkmanager
 , gi-docgen
-, docbook-xsl-nons
 , at-spi2-core
 , libstartup_notification
 , unzip
@@ -23,7 +22,6 @@
 , webp-pixbuf-loader
 , geoclue2
 , perl
-, docbook_xml_dtd_45
 , desktop-file-utils
 , libpulseaudio
 , libical
@@ -110,8 +108,6 @@ stdenv.mkDerivation (finalAttrs: {
     ninja
     pkg-config
     gettext
-    docbook-xsl-nons
-    docbook_xml_dtd_45
     gi-docgen
     perl
     wrapGAppsHook4
