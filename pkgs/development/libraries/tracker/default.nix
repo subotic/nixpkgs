@@ -25,6 +25,7 @@
 , libsoup
 , libsoup_3
 , json-glib
+, avahi
 , systemd
 , dbus
 , writeText
@@ -75,6 +76,7 @@ stdenv.mkDerivation (finalAttrs: {
     libsoup_3
     libuuid
     json-glib
+    avahi
     libstemmer
     dbus
   ] ++ lib.optionals stdenv.isLinux [
