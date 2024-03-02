@@ -43,13 +43,13 @@
 
 stdenv.mkDerivation rec {
   pname = "gnome-builder";
-  version = "46.alpha";
+  version = "46.beta";
 
   outputs = [ "out" "devdoc" ];
 
   src = fetchurl {
     url = "mirror://gnome/sources/${pname}/${lib.versions.major version}/${pname}-${version}.tar.xz";
-    sha256 = "IbPkVM0h9xh1SZ9m4GmiI6N6NgwOOoMJ01Xaw/8bJLE=";
+    sha256 = "sha256-u3kjRXffU0zuYf7r36RKeAUXfsfbyZ2R2E2vQhl5oJI=";
   };
 
   patches = [
