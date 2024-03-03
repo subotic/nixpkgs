@@ -4,7 +4,6 @@
 , ninja
 , gettext
 , fetchurl
-, fetchpatch2
 , pkg-config
 , gtk4
 , glib
@@ -43,15 +42,6 @@ stdenv.mkDerivation rec {
     url = "mirror://gnome/sources/${pname}/${lib.versions.major version}/${pname}-${version}.tar.xz";
     sha256 = "sha256-V8EitGHPDOSPrFkOpQ2T5bY9ZbWAzTuPgS/h/XXTCls=";
   };
-
-  patches = [
-    # Use gck-2 API version
-    # FIXME (GNOME 46.rc): drop this
-    (fetchpatch2 {
-      url = "https://gitlab.gnome.org/GNOME/epiphany/-/commit/bf8a0aaf9f56db6476938f9f8165535f58b7a773.patch";
-      hash = "sha256-8GhJ886PGH8LMgBNVrkt6knbmXzob7mRVWkL65BJLeE=";
-    })
-  ];
 
   nativeBuildInputs = [
     desktop-file-utils
