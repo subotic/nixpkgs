@@ -11,7 +11,8 @@
 , gdk-pixbuf
 , colord
 , glib
-, gtk3
+, libadwaita
+, gtk4
 , gusb
 , packagekit
 , libhandy
@@ -51,7 +52,8 @@ stdenv.mkDerivation rec {
     colord
     glib
     gusb
-    gtk3
+    libadwaita
+    gtk4
     libhandy
     libwebp
     packagekit
