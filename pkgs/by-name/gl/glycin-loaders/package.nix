@@ -13,16 +13,19 @@
 , cairo
 , libheif
 , libxml2
+, libseccomp
+, libjxl
+, llvmPackages
 , gnome
 }:
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "glycin-loaders";
-  version = "0.1.2";
+  version = "1.0.rc";
 
   src = fetchurl {
     url = "mirror://gnome/sources/glycin-loaders/${lib.versions.majorMinor finalAttrs.version}/glycin-loaders-${finalAttrs.version}.tar.xz";
-    hash = "sha256-x2wBklq9BwF0WJzLkWpEpXOrZbHp1JPxVOQnVkMebdc=";
+    hash = "sha256-VMTppj8hvSWtwkJCAD0ppdKH2aNqUrETwNMuxeN9KDk=";
   };
 
   patches = [
@@ -47,7 +50,12 @@ stdenv.mkDerivation (finalAttrs: {
     cairo
     libheif
     libxml2 # for librsvg crate
+    libseccomp
+    libjxl
   ];
+
+  # bindgen needs this to find libclang
+  LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
 
   passthru = {
     updateScript = gnome.updateScript {
