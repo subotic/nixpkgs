@@ -6,7 +6,7 @@
 , gettext
 , itstool
 , python3
-, wrapGAppsHook
+, wrapGAppsHook4
 , cairo
 , gdk-pixbuf
 , colord
@@ -15,7 +15,6 @@
 , gtk4
 , gusb
 , packagekit
-, libhandy
 , libwebp
 , libxml2
 , sane-backends
@@ -40,7 +39,7 @@ stdenv.mkDerivation rec {
     itstool
     pkg-config
     python3
-    wrapGAppsHook
+    wrapGAppsHook4
     libxml2
     gobject-introspection # For setup hook
     vala
@@ -54,7 +53,6 @@ stdenv.mkDerivation rec {
     gusb
     libadwaita
     gtk4
-    libhandy
     libwebp
     packagekit
     sane-backends
