@@ -7,7 +7,6 @@
 , vala
 , gettext
 , itstool
-, appstream-glib
 , desktop-file-utils
 , wrapGAppsHook
 , glib
@@ -36,7 +35,6 @@ stdenv.mkDerivation rec {
     vala
     gettext
     itstool
-    appstream-glib
     desktop-file-utils
     glib # glib-compile-resources
     wrapGAppsHook
