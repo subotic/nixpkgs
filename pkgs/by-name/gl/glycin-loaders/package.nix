@@ -9,13 +9,13 @@
 , ninja
 , pkg-config
 , rustc
+, rustPlatform
 , gtk4
 , cairo
 , libheif
 , libxml2
 , libseccomp
 , libjxl
-, llvmPackages
 , gnome
 }:
 
@@ -43,6 +43,7 @@ stdenv.mkDerivation (finalAttrs: {
     ninja
     pkg-config
     rustc
+    rustPlatform.bindgenHook # for libheif-sys
   ];
 
   buildInputs = [
@@ -53,9 +54,6 @@ stdenv.mkDerivation (finalAttrs: {
     libseccomp
     libjxl
   ];
-
-  # bindgen needs this to find libclang
-  LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
 
   passthru = {
     updateScript = gnome.updateScript {
