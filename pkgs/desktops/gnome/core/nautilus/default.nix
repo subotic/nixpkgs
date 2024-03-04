@@ -7,7 +7,6 @@
 , gi-docgen
 , docbook-xsl-nons
 , gettext
-, libxml2
 , desktop-file-utils
 , wrapGAppsHook4
 , gtk4
@@ -62,7 +61,6 @@ stdenv.mkDerivation (finalAttrs: {
     desktop-file-utils
     gettext
     gobject-introspection
-    libxml2
     meson
     ninja
     pkg-config
