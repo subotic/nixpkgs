@@ -8,7 +8,7 @@
 , gobject-introspection
 , glib
 , gtk3
-, freerdp
+, freerdp3
 , fuse3
 , unstableGitUpdater
 }:
@@ -18,7 +18,7 @@ stdenv.mkDerivation rec {
   version = "unstable-2024-03-01";
 
   src = fetchFromGitLab {
-    domain = "gitlab.gnome.org";	
+    domain = "gitlab.gnome.org";
     owner = "GNOME";
     repo = pname;
     rev = "11e9fcbee8ca5ec70456dd5b616b2560d7f73adc";
@@ -36,7 +36,7 @@ stdenv.mkDerivation rec {
   buildInputs = [
     glib
     gtk3
-    freerdp
+    freerdp3
     fuse3
   ];
 
