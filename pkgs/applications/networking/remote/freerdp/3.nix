@@ -33,7 +33,6 @@
 , libxkbfile
 , wayland
 , wayland-scanner
-, webkitgtk
 , icu
 , libunwind
 , orc
@@ -147,7 +146,6 @@ stdenv.mkDerivation (finalAttrs: {
     fuse3
     systemd
     wayland
-    webkitgtk
   ] ++ lib.optionals stdenv.isDarwin [
     AudioToolbox
     AVFoundation
@@ -180,7 +178,7 @@ stdenv.mkDerivation (finalAttrs: {
     WITH_PCSC = (pcsclite != null);
     WITH_PULSE = (libpulseaudio != null);
     WITH_SERVER = buildServer;
-    WITH_WEBVIEW = (stdenv.isLinux && webkitgtk != null);
+    WITH_WEBVIEW = false; # avoid introducing webkit2gtk-4.0
     WITH_VAAPI = false; # false is recommended by upstream
     WITH_X11 = true;
   };
