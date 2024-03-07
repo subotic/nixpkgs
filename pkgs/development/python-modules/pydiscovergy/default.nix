@@ -16,7 +16,7 @@
 
 buildPythonPackage rec {
   pname = "pydiscovergy";
-  version = "2.0.5";
+  version = "3.0.0";
   format = "pyproject";
 
   disabled = pythonOlder "3.10";
@@ -58,7 +58,7 @@ buildPythonPackage rec {
   meta = with lib; {
     description = "Async Python 3 library for interacting with the Discovergy API";
     homepage = "https://github.com/jpbede/pydiscovergy";
-    changelog = "https://github.com/jpbede/pydiscovergy/releases/tag/${version}";
+    changelog = "https://github.com/jpbede/pydiscovergy/releases/tag/v${version}";
     license = licenses.mit;
     maintainers = with maintainers; [ fab ];
   };
