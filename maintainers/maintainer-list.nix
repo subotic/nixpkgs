@@ -18548,6 +18548,12 @@
     githubId = 12984845;
     name = "Subhrajyoti Sen";
   };
+  subotic = {
+    email = "i@subotic.ch";
+    github = "subotic";
+    githubId = 400790;
+    name = "Ivan Subotic";
+  };
   sudosubin = {
     email = "sudosubin@gmail.com";
     github = "sudosubin";

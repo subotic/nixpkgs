@@ -32394,6 +32394,8 @@ with pkgs;
     stdenv = gccStdenv;
   };
 
+  iiif-validator = callPackage ../applications/misc/iiif-validator { };
+
   ikiwiki = callPackage ../applications/misc/ikiwiki {
     python = python3;
     inherit (perlPackages.override { pkgs = pkgs // { imagemagick = imagemagickBig;}; }) ImageMagick;
